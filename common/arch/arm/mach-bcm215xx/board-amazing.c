@@ -1939,15 +1939,15 @@ static u32 pmu_event_callback(int event, int param)
 
 	if(SYSPARM_GetDefault4p2VoltReading())	
 //		Default4p2Volt = SYSPARM_GetDefault4p2VoltReading();
-		Default4p2Volt = 0x364 - 5;
+		Default4p2Volt = 0x364 + 5;
 	else
-		Default4p2Volt = 0x364 - 5;
+		Default4p2Volt = 0x364 + 5;
 
 	if(SYSPARM_GetBattEmptyThresh())
 //		BattEmptyThresh = SYSPARM_GetBattEmptyThresh();
-		BattEmptyThresh = 0x2BF - 5;
+		BattEmptyThresh = 0x2BF + 5;
 	else
-		BattEmptyThresh = 0x2BF - 5;
+		BattEmptyThresh = 0x2BF + 5;
 	
 	printk(KERN_INFO"Default4p2Volt 0x%x\n", Default4p2Volt);
 	printk(KERN_INFO"BattEmptyThresh3P4V 0x%x\n", BattEmptyThresh);

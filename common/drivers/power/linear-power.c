@@ -74,7 +74,7 @@
 
 #define USB_PREENUM_CURR_REQ_VAL MAX8986_CHARGING_CURR_450MA
 
-#define BATT_RECHARGE_VOLT	4130
+#define BATT_RECHARGE_VOLT	4140
 
 #define BATT_LOW_VOLT		3400
 
@@ -1123,7 +1123,7 @@ static void max8986_ril_adc_notify_cb(SimNumber_t simid, unsigned long msg_type,
 		}
 		inner_function(max8986_power);				
 
-		if(pmu_is_charger_inserted() && max8986_power->batt_voltage > 4100)
+		if(pmu_is_charger_inserted() && max8986_power->batt_voltage > 4160)
 		{
 			if(  gpio_get_value(CHG_STATE)==SH_OFF && gpio_get_value(CHG_DET)==SH_ON 
             && max8986_power->is_timer_expired != TRUE )
@@ -1266,13 +1266,13 @@ static void max8986_batt_lvl_mon_wq(struct work_struct *work)
 			cnt_func_called=0;
 			max8986_get_batt_level_adc(max8986_power);		
 		
-			if( mon_interval == BATTERY_LVL_MON_INTERVAL_WHILE_CHARGING / 2)
+			//if( mon_interval == BATTERY_LVL_MON_INTERVAL_WHILE_CHARGING / 2)
 				check_func_called_by_cp=true;
 		}
 		inner_function(max8986_power);
 
 		// Temporary EOC
-		if(  gpio_get_value(CHG_STATE)==SH_OFF && gpio_get_value(CHG_DET)==SH_ON && max8986_power->batt_voltage > 4100
+		if(  gpio_get_value(CHG_STATE)==SH_OFF && gpio_get_value(CHG_DET)==SH_ON && max8986_power->batt_voltage > 4160
          && max8986_power->is_timer_expired != TRUE)
 		{
 			max8986_power->charging_status = POWER_SUPPLY_STATUS_FULL;

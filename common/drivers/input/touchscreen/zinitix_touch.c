@@ -2765,13 +2765,11 @@ static int zinitix_touch_probe(struct i2c_client *client,
 		return 0;
 	}
 	touch_ctrl_regulator(1); 
-	mdelay(CHIP_ON_DELAY);
-	mdelay(500);
-	touch_ctrl_regulator(0); 
-	mdelay(1000);
-	touch_ctrl_regulator(1); 
-	mdelay(CHIP_ON_DELAY);
-	mdelay(500);
+	mdelay(300);
+	firmware_touch_ctrl_regulator(POWER_OFF);	
+	mdelay(300);
+	firmware_touch_ctrl_regulator(POWER_ON);	
+	mdelay(300);
 
 	zinitix_debug_msg("i2c check function \r\n");
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
